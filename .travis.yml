@@ -2,26 +2,12 @@ language: cpp
 
 # Prep tools
 before_install:
-# Build toolchain:
- #- git clone https://github.com/pfalcon/esp-open-sdk.git
- #- cd esp-open-sdk
- #- git submodule init
- #- git submodule update
- #- cd ../
- #- wget http://mirrors.kernel.org/ubuntu/pool/main/a/autoconf/autoconf_2.69-6_all.deb
- #- sudo dpkg -i autoconf_2.69-6_all.deb
- #- sudo apt-get update -q
+ - sudo apt-get install -y python-serial
 
 # Install tools
 install:
-# Build toolchain:
- #- sudo apt-get install -y make unrar automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python sed
- #- cd esp-open-sdk
- #- make STANDALONE=n 
- #- cd ../
 # Use prebuilt toolchain:
  - tar -zxvf tools/esp-open-sdk.tar.gz
- - sudo apt-get install -y python-serial
  - export PATH=$PATH:$PWD/esp-open-sdk/sdk:$PWD/esp-open-sdk/xtensa-lx106-elf/bin
 
 # Run the Build script
