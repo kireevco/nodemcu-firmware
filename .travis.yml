@@ -2,11 +2,11 @@ language: cpp
 
 # Prep tools
 before_install:
- - git clone https://github.com/pfalcon/esp-open-sdk.git
- - cd esp-open-sdk
- - git submodule init
- - git submodule update
- - cd ../
+ #- git clone https://github.com/pfalcon/esp-open-sdk.git
+ #- cd esp-open-sdk
+ #- git submodule init
+ #- git submodule update
+ #- cd ../
  - wget http://mirrors.kernel.org/ubuntu/pool/main/a/autoconf/autoconf_2.69-6_all.deb
  - sudo dpkg -i autoconf_2.69-6_all.deb
  - sudo apt-get update -q
@@ -14,10 +14,11 @@ before_install:
 # Install tools
 install:
  - sudo apt-get install -y make unrar automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python sed
- - cd esp-open-sdk
- - make STANDALONE=n
- - cd ../
- - export PATH=$PATH:esp-open-sdk/sdk
+ #- cd esp-open-sdk
+ #- make STANDALONE=n
+ - tar -zxvf tools/esp-open-sdk.tar.gz 
+ #- cd ../
+ - export PATH=$PATH:esp-open-sdk/sdk:esp-open-sdk/xtensa-lx106-elf/bin
 
 # Run the Build script
 script:
