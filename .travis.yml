@@ -13,7 +13,7 @@ before_install:
 install:
  - sudo apt-get install -y make unrar autoconf automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python sed
  - cd esp-open-sdk
- - make STANDALONE=y
+ - make STANDALONE=n
  - cd ../
  - export PATH=$PATH:esp-open-sdk/sdk
 
