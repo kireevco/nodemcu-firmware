@@ -7,12 +7,13 @@ before_install:
  - git submodule init
  - git submodule update
  - cd ../
- - sudo add-apt-repository ppa:costamagnagianfranco/autoconf -y
+ - wget http://mirrors.kernel.org/ubuntu/pool/main/a/autoconf/autoconf_2.69-6_all.deb
+ - sudo dpkg -i autoconf_2.69-6_all.deb
  - sudo apt-get update -q
 
 # Install tools
 install:
- - sudo apt-get install -y make unrar autoconf automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python sed
+ - sudo apt-get install -y make unrar automake libtool gcc g++ gperf flex bison texinfo gawk ncurses-dev libexpat-dev python sed
  - cd esp-open-sdk
  - make STANDALONE=n
  - cd ../
