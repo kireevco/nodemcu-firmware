@@ -18,7 +18,7 @@ install:
  #- make STANDALONE=n
  - tar -zxvf tools/esp-open-sdk.tar.gz 
  #- cd ../
- - export PATH=$PATH:esp-open-sdk/sdk:esp-open-sdk/xtensa-lx106-elf/bin
+ - export PATH=$PATH:$PWD/esp-open-sdk/sdk:$PWD/esp-open-sdk/xtensa-lx106-elf/bin
 
 # Run the Build script
 script:
