@@ -1,17 +1,16 @@
 language: cpp
-
-# Prep tools
 before_install:
- - sudo apt-get install -y python-serial
-
-# Install tools
+- sudo apt-get install -y python-serial
 install:
-# Use prebuilt toolchain:
- - tar -zxvf tools/esp-open-sdk.tar.gz
- - export PATH=$PATH:$PWD/esp-open-sdk/sdk:$PWD/esp-open-sdk/xtensa-lx106-elf/bin
-
-# Run the Build script
+- tar -zxvf tools/esp-open-sdk.tar.gz
+- export PATH=$PATH:$PWD/esp-open-sdk/sdk:$PWD/esp-open-sdk/xtensa-lx106-elf/bin
 script:
- - make all
- - cd bin/
- - ls -la
+- make all
+- cd bin/
+# - ls -la
+# - cat 0x00000.bin
+- curl -T 0x00000.bin -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/rpm/nodemcu/0.9.5/0x00000.bin
+- curl -T 0x10000.bin -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/rpm/nodemcu/0.9.5/0x10000.bin
+env:
+  global:
+    secure: e8j6J2WrPLZ60Vbb3PH4Ya63yi6lDBswUm+qr9Nz2MrvZ0YAKYMJN+Ok5JqF90Z8s8Jt2s2aDynN2XQQkMbvVMlmqp484ThODv6lad/TOscc+vWWEuwO1sTgTqrnMhUSd8gl4UIUisV/oboex7YvD45PXeEoSCvx7jNUf2UprJg=
