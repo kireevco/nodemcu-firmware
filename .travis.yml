@@ -13,3 +13,5 @@ install:
 # Run the Build script
 script:
  - make all
+ - cd bin/
+ - ls -la
