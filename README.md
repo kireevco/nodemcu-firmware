@@ -337,3 +337,4 @@ cu:send("hello")
 	-- first LED green, second LED white
 	ws2812.write(4, string.char(255, 0, 0, 255, 255, 255))
 ```
+
