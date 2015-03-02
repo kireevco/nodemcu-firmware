@@ -8,10 +8,12 @@ install:
 script:
 - make all
 - cd bin/
-- file_name="nodemcu-firmware_v_$TRAVIS_BRANCH_$TRAVIS_BUILD_NUMBER.bin"
+- file_name="nodemcu-firmware_v_$TRAVIS_TAG_$TRAVIS_BUILD_NUMBER.bin"
+- echo $TRAVIS_BUILD_DIR
+- echo $TRAVIS_REPO_SLUG
 # - ls -la
 # - cat 0x00000.bin
-- tools/esptool.py make_image -f 0x00000.bin -a 0x00000 -f 0x10000.bin -a 0x10000 "${file_name}"
+- $TRAVIS_BUILD_DIR/tools/esptool.py make_image -f 0x00000.bin -a 0x00000 -f 0x10000.bin -a 0x10000 "${file_name}"
 - curl -T "${file_name}" -ukireevco:$BINTRAY_API_KEY "https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/"${file_name}""
 # - curl -T "0x00000.bin" -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/0x00000.bin
 # - curl -T "0x10000.bin" -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/0x10000.bin
