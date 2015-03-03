@@ -1,22 +1,30 @@
 language: cpp
 before_install:
-- sudo apt-get install -y python-serial
+- sudo apt-get install -y python-serial srecord
 install:
-
 - tar -zxvf tools/esp-open-sdk.tar.gz
 - export PATH=$PATH:$PWD/esp-open-sdk/sdk:$PWD/esp-open-sdk/xtensa-lx106-elf/bin
 script:
 - make all
 - cd bin/
 - file_name="nodemcu-firmware_v_$TRAVIS_TAG_$TRAVIS_BUILD_NUMBER.bin"
-- echo $TRAVIS_BUILD_DIR
-- echo $TRAVIS_REPO_SLUG
+# - echo $TRAVIS_BUILD_DIR
+# - echo $TRAVIS_REPO_SLUG
 # - ls -la
 # - cat 0x00000.bin
-- $TRAVIS_BUILD_DIR/tools/esptool.py make_image -f 0x00000.bin -a 0x00000 -f 0x10000.bin -a 0x10000 "${file_name}"
-- curl -T "${file_name}" -ukireevco:$BINTRAY_API_KEY "https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/"${file_name}""
+# - srec_cat -output ${file_name} -binary 0x00000.bin -binary -fill 0xff 0x00000 0x10000 0x10000.bin -binary -offset 0x10000
+# - $TRAVIS_BUILD_DIR/tools/esptool.py make_image -f 0x00000.bin -a 0x00000 -f 0x10000.bin -a 0x10000 "${file_name}"
+# - curl -T "${file_name}" -ukireevco:$BINTRAY_API_KEY "https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/"${file_name}"
 # - curl -T "0x00000.bin" -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/0x00000.bin
 # - curl -T "0x10000.bin" -ukireevco:$BINTRAY_API_KEY https://api.bintray.com/content/nodemcu/nodemcu-firmware/nodemcu-firmware/0.9.5/0x10000.bin
+deploy:
+  provider: releases
+  api_key: "${GITHUB_OAUTH}"
+  file: "${file_name}"
+  skip_cleanup: true
+  on:
+    tags: true
 env:
   global:
-    secure: e8j6J2WrPLZ60Vbb3PH4Ya63yi6lDBswUm+qr9Nz2MrvZ0YAKYMJN+Ok5JqF90Z8s8Jt2s2aDynN2XQQkMbvVMlmqp484ThODv6lad/TOscc+vWWEuwO1sTgTqrnMhUSd8gl4UIUisV/oboex7YvD45PXeEoSCvx7jNUf2UprJg=
+  - secure: e8j6J2WrPLZ60Vbb3PH4Ya63yi6lDBswUm+qr9Nz2MrvZ0YAKYMJN+Ok5JqF90Z8s8Jt2s2aDynN2XQQkMbvVMlmqp484ThODv6lad/TOscc+vWWEuwO1sTgTqrnMhUSd8gl4UIUisV/oboex7YvD45PXeEoSCvx7jNUf2UprJg=
+  - secure: OVFK1zFj8VFVITWIGR2UlinVoTFNjlcQZeFt4xpn+B0wLz1mAWnR//F49qLkAcZt2ca8ogbQwEyDenFfkcSKOkUpvivyDatkHEt4WAhdXeg2y3zdHjX7NntscQBpTUmwjhV/0OA0qV9sNLK5r1t45oDh2NVcpfEQTJP5oYKfe6I=
