@@ -7,7 +7,7 @@ install:
 script:
 - make all
 - cd bin/
-- file_name="nodemcu-firmware_v_$TRAVIS_TAG_$TRAVIS_BUILD_NUMBER.bin"
+- file_name="nodemcu-firmware_v_${TRAVIS_TAG}_${TRAVIS_BUILD_NUMBER}.bin"
 # - echo $TRAVIS_BUILD_DIR
 # - echo $TRAVIS_REPO_SLUG
 # - ls -la
